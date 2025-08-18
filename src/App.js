@@ -35,7 +35,7 @@ function App() {
       </header>
         <div>
       {data ? (
-        <p>Received data: {JSON.stringify(data)}</p>
+        <p>Received data: {data}</p>
       ) : (
         <p>Loading data...</p>
       )}
