@@ -12,7 +12,7 @@ function App() {
           method: 'GET'
         }
       );
-      const data = await response.body;
+      const data = await response.json;
       setData(data);
     };
     fetchData();
