@@ -7,7 +7,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        'https://greasy-datafetcher-d2e2f0fec4afbpcm.norwayeast-01.azurewebsites.net/api/Function1',
+        `${process.env.FUNCTION_URL}?code=${process.env.FUNCTION_KEY}`,
         {
           method: 'GET'
         }
