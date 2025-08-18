@@ -12,8 +12,8 @@ function App() {
           method: 'GET'
         }
       );
-      const data = await response;
-      setData(data);
+      const text = await response.text;
+      setData(text);
     };
     fetchData();
   }, []);
