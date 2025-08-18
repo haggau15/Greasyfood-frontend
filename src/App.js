@@ -1,7 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react';
 
 function App() {
+    const [data, setData] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        'https://greasy-datafetcher-d2e2f0fec4afbpcm.norwayeast-01.azurewebsites.net/api/Function1',
+        {
+          method: 'GET'
+        }
+      );
+      const data = await response.json();
+      setData(data);
+    };
+    fetchData();
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +33,13 @@ function App() {
           Learn Redddddact
         </a>
       </header>
+        <div>
+      {data ? (
+        <p>Received data: {JSON.stringify(data)}</p>
+      ) : (
+        <p>Loading data...</p>
+      )}
+    </div>
     </div>
   );
 }
