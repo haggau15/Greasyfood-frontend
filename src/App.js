@@ -7,7 +7,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `${process.env.FUNCTION_URL}?code=${process.env.FUNCTION_KEY}`,
+        `${process.env.REACT_APP_FUNCTION_URL}?code=${process.env.REACT_APP_FUNCTION_KEY}`,
         {
           method: 'GET'
         }
