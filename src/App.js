@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import ItemsList from "./GreasyPlaces/ItemsList"; // relative path
 import React, { useState, useEffect } from 'react';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn Redddddact
+          <ItemsList/>
         </a>
       </header>
         <div>
