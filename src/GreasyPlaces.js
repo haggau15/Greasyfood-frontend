@@ -5,7 +5,7 @@ export default function ItemsList() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    axios.get("items").then(res => setItems(res.data));
+    axios.get("api/items").then(res => setItems(res.data));
   }, []);
 
   return (

@@ -1,47 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-import ItemsList from "./GreasyPlaces"; // relative path
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
 
 function App() {
-    const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
+
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_FUNCTION_URL}?code=${process.env.REACT_APP_FUNCTION_KEY}`,
-        {
-          method: 'GET'
-        }
-      );
-      const text = await response.text();
-      setData(text);
-    };
-    fetchData();
+    fetch("/api/getGreaseData")
+      .then((res) => res.json())
+      .then((items) => setData(items))
+      .catch((err) => console.error("Failed to load data:", err));
   }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://yr.no"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Redddddact
-          <ItemsList/>
-        </a>
-      </header>
-        <div>
-      {data ? (
-        <p>Received data: {data}</p>
-      ) : (
-        <p>Loading data...</p>
-      )}
-    </div>
+    <div>
+      <h1>Grease Container Items</h1>
+      <ul>
+        {data.map((item) => (
+          <li key={item.id}>{JSON.stringify(item)}</li>
+        ))}
+      </ul>
     </div>
   );
 }
