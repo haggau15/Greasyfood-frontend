@@ -9,6 +9,7 @@ const client = new CosmosClient({ endpoint, key });
 
 module.exports = async function (context, req) {
   try {
+    console.log("yo");
     const { resources: items } = await client
       .database(databaseId)
       .container(containerId)
