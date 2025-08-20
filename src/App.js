@@ -26,7 +26,7 @@ function App() {
         </p>
         <a
           className="App-link"
-          href="https://vg.no"
+          href="https://yr.no"
           target="_blank"
           rel="noopener noreferrer"
         >
