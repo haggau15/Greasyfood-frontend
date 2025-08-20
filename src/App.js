@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import ItemsList from "./GreasyPlaces/ItemsList"; // relative path
+import ItemsList from "./GreasyPlaces"; // relative path
 import React, { useState, useEffect } from 'react';
 
 function App() {
