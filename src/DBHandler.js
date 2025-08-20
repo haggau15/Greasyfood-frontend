@@ -12,7 +12,7 @@ const container = database.container("greasecontainer");
 
 app.get("/items", async (req, res) => {
   try {
-    const { resources } = await container.items.query("SELECT * FROM c").fetchAll();
+    const { resources } = await container.items.query("SELECT * FROM items").fetchAll();
     res.json(resources);
   } catch (err) {
     console.error(err);
