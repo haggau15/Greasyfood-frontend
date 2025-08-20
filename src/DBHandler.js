@@ -10,7 +10,7 @@ const client = new CosmosClient(process.env.COSMOS_CONNECTION_STRING);
 const database = client.database("greasecontainerdb");
 const container = database.container("greasecontainer");
 
-app.get("/api/items", async (req, res) => {
+app.get("/items", async (req, res) => {
   try {
     const { resources } = await container.items.query("SELECT * FROM c").fetchAll();
     res.json(resources);
