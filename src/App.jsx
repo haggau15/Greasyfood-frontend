@@ -90,7 +90,7 @@ export default function App() {
 
   return (
     <div className="layout">
-      <aside className="sidebar" role="complementary" aria-label="Filters and controls">
+      <aside className="sidebar" aria-label="Filters and controls">
         <Sidebar
           minRating={minRating}
           onMinRatingChange={setMinRating}
@@ -101,7 +101,7 @@ export default function App() {
         />
       </aside>
 
-      <main className="main" role="main" aria-live="polite">
+      <main className="main" aria-live="polite">
         {usingFallback && !loading && (
           <div
             className="loading"
