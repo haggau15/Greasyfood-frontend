@@ -17,7 +17,7 @@ function normalizePlacesPayload(payload) {
     description: undefined, // could derive from top review if desired
     lat: p.location?.latitude ?? p.geometry?.location?.lat ?? null,
     lng: p.location?.longitude ?? p.geometry?.location?.lng ?? null,
-    reviews: Array.isArray(p.reviews) ? p.reviews : [],
+    reviews: Array.isArray(p.reviews.text) ? p.reviews.text : [],
   }));
 }
 
@@ -29,7 +29,7 @@ export default function App() {
 
   const [minRating, setMinRating] = useState(0);
   const [sortBy, setSortBy] = useState("name"); // "name" | "rating"
-
+  //const [reviews,setReviews] = useState("");
   const fetchLocations = async () => {
     try {
       setLoading(true);
