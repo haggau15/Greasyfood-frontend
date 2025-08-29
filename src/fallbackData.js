@@ -1,12 +1,8 @@
-import './App.css';
-import React, { useState, useEffect } from 'react';
-//import { jsx } from 'react/jsx-runtime';
-
-
-const obama = {
+export const fallBackData = {
   "places": [
     {
       "id": "ChIJp1fMLxFuQUYR2unxx_mdGUU",
+      "rating": 4.6,
       "types": [
         "meal_takeaway",
         "fast_food_restaurant",
@@ -134,6 +130,7 @@ const obama = {
     },
     {
       "id": "ChIJ2TROTABvQUYRWgI5sMnPs8A",
+      "rating": 1.6,
       "types": [
         "fast_food_restaurant",
         "restaurant",
@@ -153,52 +150,3 @@ const obama = {
     }
   ]
 }
-
-
-
-
-function App() {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-  fetch("./testdata.json")
-      .then((res) => res.json())
-      .then((json) => setData(json.toString()));
-  }, []);
-    console.log(obama.places[0].id);
-      console.log(data);
-
-    if (!obama) {
-    return <p>Loading...</p>; // ✅ prevents null error
-  }
-  //setData("Obama");
-  return (
-     <div>
-      <h1>Places</h1>
-      <ul>
-        {obama.places.map((place) => (
-          <li key={place.id}>{place.displayName.text}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default App;
-
-/*
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_FUNCTION_URL}?code=${process.env.REACT_APP_FUNCTION_KEY}`,
-        {
-          method: 'GET'
-        }
-      );
-      const text = await response.text();
-      setData(text);
-    };
-    fetchData();
-  }, []);
-*/
-
-
