@@ -1,11 +1,64 @@
-function StarBar({ rating = 0 }) {
-  // Draw 5 stars with a filled overlay based on rating (0..5)
+import { useMemo } from "react";
+
+function StarBar({ rating = 0, size = 16 }) {
   const percentage = Math.max(0, Math.min(5, rating)) / 5 * 100;
   return (
-    <div className="stars" aria-label={`Rating ${rating} out of 5`}>
+    <div className="stars" aria-label={`Rating ${rating} out of 5`} style={{ fontSize: size }}>
       <div className="stars-empty">★★★★★</div>
       <div className="stars-filled" style={{ width: `${percentage}%` }}>★★★★★</div>
     </div>
+  );
+}
+
+function formatDate(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return isNaN(d) ? "" : d.toLocaleDateString();
+}
+
+function Reviews({ reviews }) {
+const top = useMemo(
+    () => (Array.isArray(reviews) ? reviews.slice(0, 3) : []),
+    [reviews]
+  );
+  
+  if (top.length === 0) return null;
+
+  return (
+    <details className="reviews">
+      <summary>
+        Reviews ({reviews.length})
+      </summary>
+
+      <ul className="review-list">
+        {top.map((r, idx) => {
+          const key = r.name ?? `${idx}`;
+          const author = r.authorAttribution?.displayName ?? "Anonymous";
+          const when = r.relativePublishTimeDescription || formatDate(r.publishTime);
+          const avatar = r.authorAttribution?.photoUri;
+          const text = r.text?.text || r.originalText?.text || "";
+          const stars = Number(r.rating ?? 0);
+
+          return (
+            <li key={key} className="review">
+              <div className="review-header">
+                {avatar ? <img className="avatar" src={avatar} alt="" /> : <div className="avatar avatar-fallback" aria-hidden="true">👤</div>}
+                <div className="review-meta">
+                  <div className="author">{author}</div>
+                  <div className="time">{when}</div>
+                </div>
+                <StarBar rating={stars} size={14} />
+              </div>
+              {text && <p className="review-text">{text}</p>}
+            </li>
+          );
+        })}
+      </ul>
+
+      {reviews.length > 3 && (
+        <div className="more-hint">Showing 3 of {reviews.length}. Open to view.</div>
+      )}
+    </details>
   );
 }
 
@@ -32,6 +85,9 @@ function LocationCard({ loc }) {
           <span>Lng: {Number(loc.lng).toFixed(4)}</span>
         </p>
       )}
+
+      {/* NEW: reviews */}
+      <Reviews reviews={loc.reviews} />
     </article>
   );
 }

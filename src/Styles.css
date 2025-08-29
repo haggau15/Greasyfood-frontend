@@ -158,6 +158,78 @@ input[type="range"]::-moz-range-thumb{
   gap: 16px;
 }
 
+/* Reviews */
+.reviews {
+  margin-top: 8px;
+  border-top: 1px dashed #e5e7eb;
+  padding-top: 8px;
+}
+
+.reviews > summary {
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  color: #374151;
+  outline: none;
+  margin: 0 0 6px;
+}
+.reviews > summary::-webkit-details-marker { display: none; }
+
+.review-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.review {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
+}
+.avatar-fallback {
+  display: grid;
+  place-items: center;
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.review-meta {
+  display: grid;
+  line-height: 1.1;
+  flex: 1;
+}
+.author { font-weight: 600; }
+.time { font-size: 12px; color: #6b7280; }
+
+.review-text {
+  margin: 8px 0 0;
+  white-space: pre-wrap;
+}
+
+.more-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+
 .card{
   background: var(--surface);
   border: 1px solid var(--border);
