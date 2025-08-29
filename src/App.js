@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { jsx } from 'react/jsx-runtime';
+//import { jsx } from 'react/jsx-runtime';
 
 
 const obama = {
@@ -159,13 +159,13 @@ const obama = {
 
 function App() {
   const [data, setData] = useState(null);
-  
   useEffect(() => {
   fetch("./testdata.json")
       .then((res) => res.json())
       .then((json) => setData(json.toString()));
   }, []);
     console.log(obama.places[0].id);
+      console.log(data);
 
     if (!obama) {
     return <p>Loading...</p>; // ✅ prevents null error
