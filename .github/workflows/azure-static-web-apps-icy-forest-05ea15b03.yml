@@ -26,6 +26,7 @@ jobs:
           REACT_APP_FUNCTION_URL: ${{ secrets.REACT_APP_FUNCTION_URL }}
           REACT_APP_FUNCTION_KEY: ${{ secrets.REACT_APP_FUNCTION_KEY }}
           COSMOS_CONNECTION_STRING: ${{ secrets.COSMOS_CONNECTION_STRING}}
+          REACT_APP_CONSUMECDB_URI: ${{secrets.REACT_APP_CONSUMECDB_URI}}
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ICY_FOREST_05EA15B03 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
