@@ -38,7 +38,9 @@ export default function App() {
       console.log("URL: ",`${process.env.REACT_APP_CONSUMECDB_URI}`);
 
       const res = await fetch(`${process.env.REACT_APP_CONSUMECDB_URI}`, {
-        headers: { Accept: "application/json" },
+        headers: { Accept: "application/json" ,
+          
+        },
       });
       if (!res.ok) throw new Error(`Fetch failed with ${res.status}`);
       const data = await res.json();
