@@ -30,6 +30,10 @@ export default function App() {
   const [minRating, setMinRating] = useState(0);
   const [sortBy, setSortBy] = useState("name"); // "name" | "rating"
   //const [reviews,setReviews] = useState("");
+
+  const variable = process.env.REACT_APP_API_KEY;
+  console.log(variable);
+  
   const fetchLocations = async () => {
     try {
       setLoading(true);
