@@ -36,18 +36,12 @@ function SentimentChip({ sentiment }) {
 }
 
 function Reviews({ reviews }) {
-  // Memoize the normalized list so the reference is stable
-  const list = useMemo(
-    () => (Array.isArray(reviews) ? reviews : []),
-    [reviews]
-  );
-
+  const list = useMemo(() => (Array.isArray(reviews) ? reviews : []), [reviews]);
   const top = useMemo(() => list.slice(0, 3), [list]);
-
   if (top.length === 0) return null;
 
   return (
-    <details className="reviews">
+    <details className="reviews" open>
       <summary>Reviews ({list.length})</summary>
 
       <ul className="review-list">
@@ -58,6 +52,7 @@ function Reviews({ reviews }) {
           const avatar = r.authorAttribution?.photoUri;
           const text = r.text?.text || r.originalText?.text || "";
           const stars = Number(r.rating ?? 0);
+          const senti = dominantSentiment(r.text?.sentiment);
 
           return (
             <li key={key} className="review">
@@ -69,7 +64,12 @@ function Reviews({ reviews }) {
                 </div>
                 <StarBar rating={stars} size={14} />
               </div>
-              {text && <p className="review-text">{text}</p>}
+
+              {text && (
+                <p className="review-text">
+                  {text} {senti && <span className="review-sentiment"><SentimentChip sentiment={senti} /></span>}
+                </p>
+              )}
             </li>
           );
         })}
@@ -81,6 +81,7 @@ function Reviews({ reviews }) {
     </details>
   );
 }
+
 
 
 /** Normalize one Google Places-style object to the UI's expected shape */
