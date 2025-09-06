@@ -36,7 +36,12 @@ function SentimentChip({ sentiment }) {
 }
 
 function Reviews({ reviews }) {
-  const list = Array.isArray(reviews) ? reviews : [];
+  // Memoize the normalized list so the reference is stable
+  const list = useMemo(
+    () => (Array.isArray(reviews) ? reviews : []),
+    [reviews]
+  );
+
   const top = useMemo(() => list.slice(0, 3), [list]);
 
   if (top.length === 0) return null;
@@ -53,26 +58,18 @@ function Reviews({ reviews }) {
           const avatar = r.authorAttribution?.photoUri;
           const text = r.text?.text || r.originalText?.text || "";
           const stars = Number(r.rating ?? 0);
-          const senti = dominantSentiment(r.text?.sentiment);
 
           return (
             <li key={key} className="review">
               <div className="review-header">
-                {avatar
-                  ? <img className="avatar" src={avatar} alt="" />
-                  : <div className="avatar avatar-fallback" aria-hidden="true">👤</div>}
+                {avatar ? <img className="avatar" src={avatar} alt="" /> : <div className="avatar avatar-fallback" aria-hidden="true">👤</div>}
                 <div className="review-meta">
                   <div className="author">{author}</div>
                   <div className="time">{when}</div>
                 </div>
                 <StarBar rating={stars} size={14} />
               </div>
-
-              {text && (
-                <p className="review-text">
-                  {text} {senti && <span className="review-sentiment"><SentimentChip sentiment={senti} /></span>}
-                </p>
-              )}
+              {text && <p className="review-text">{text}</p>}
             </li>
           );
         })}
@@ -84,6 +81,7 @@ function Reviews({ reviews }) {
     </details>
   );
 }
+
 
 /** Normalize one Google Places-style object to the UI's expected shape */
 function normalizePlace(raw) {
